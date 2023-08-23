@@ -1,0 +1,56 @@
+Started by user admin
+Running as SYSTEM
+Building in workspace /var/lib/jenkins/workspace/python-file
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/python-file/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/shivshankar7977/CDAC_HPCSA_PROJECT.git # timeout=10
+Fetching upstream changes from https://github.com/shivshankar7977/CDAC_HPCSA_PROJECT.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.34.1'
+ > git fetch --tags --force --progress -- https://github.com/shivshankar7977/CDAC_HPCSA_PROJECT.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision 2a43166b8d319cfabb0cf5dfd7749cce8c1ba4ea (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 2a43166b8d319cfabb0cf5dfd7749cce8c1ba4ea # timeout=10
+Commit message: "Update demo.py"
+ > git rev-list --no-walk 2a43166b8d319cfabb0cf5dfd7749cce8c1ba4ea # timeout=10
+[python-file] $ /bin/sh -xe /tmp/jenkins4134005543908009145.sh
++ sudo systemctl restart docker
++ sudo rm -rf /root/python
++ sudo mkdir -p /root/python
++ sudo git clone https://github.com/shivshankar7977/CDAC_HPCSA_PROJECT.git /root/python/
+Cloning into '/root/python'...
++ sudo docker build -t pythimg .
+Sending build context to Docker daemon  1.655MB
+
+Step 1/7 : FROM centos:centos7
+ ---> eeb6ee3f44bd
+Step 2/7 : RUN yum update -y
+ ---> Using cache
+ ---> efd3d42f19e9
+Step 3/7 : RUN yum upgrade -y
+ ---> Using cache
+ ---> a24c84445a2b
+Step 4/7 : RUN yum install python3 -y
+ ---> Using cache
+ ---> fd7ac6ec299b
+Step 5/7 : RUN mkdir /app
+ ---> Using cache
+ ---> 3ce7c65f5b53
+Step 6/7 : COPY . /app/
+ ---> Using cache
+ ---> 5c66ffc2214f
+Step 7/7 : CMD [ "python3" , "/app/demo.py" ]
+ ---> Using cache
+ ---> f20c3c18c118
+Successfully built f20c3c18c118
+Successfully tagged pythimg:latest
++ sudo docker rm c66
+c66
++ sudo docker run --name c66 pythimg
+The sum of a and b is  9
++ sudo docker start c66
+c66
+Finished: SUCCESS
