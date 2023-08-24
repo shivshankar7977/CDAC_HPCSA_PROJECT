@@ -1,4 +1,4 @@
-a=input("Enter 1st number:")
-b=input("Enter 2nd number:")
+a=5
+b=7
 c=a+b
-print("The sum of a and b is ",c)
+print("The sum of a and b is :",c)
