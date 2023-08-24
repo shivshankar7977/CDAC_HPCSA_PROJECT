@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- meta tags -->
+    <meta name="description" content="my page">
+    <meta name="keywords" content="this is my page">
+    <meta name="robots" content="INDEX, FOLLOW">
+    <!-- meta tag to link css and js -->
+    <link name="stylesheet" href="mp.css">
+    <script src="mp.js"></script>
+    <title>MY NOTES</title>
+</head>
+
+<body>
+    <!-- Heading -->
+    <h1>hello friends</h1>
+    <h2>hello friends</h2>
+    <h3>hello friends</h3>
+    <h4>hello friends</h4>
+    <h5>hello friends</h5>
+    <h6>hello friends</h6>
+    <!-- paragraph -->
+    <!-- to add horizontal line <hr> -->
+    <hr>
+    <p>Search engine optimization is the process of improving the quality and quantity of website traffic to a website
+        or a web page from search engines. SEO targets unpaid traffic rather than direct traffic or paid traffic.</p>
+    <!-- For text that outside the screen (alt+Z)-->
+    <!-- for bold text <b> or <strong>_____</strong> -->
+    <!-- for italic text <i> or <em>____</em>-->
+    <p>Lorem, <b>ipsum </b> dolor sit <strong>amet consectetur </strong> adipisicing elit. Minus iusto quae temporibus
+        esse, voluptatibus dolore ratione dolores <i>tenetur</i> tenetur <b><em>voluptate</em> </b> voluptate minima
+        doloremque, eum debitis corrupti repellat delectus ipsam? Qui, repudiandae blanditiis.</p>
+    <!-- lorem for random(no of words) -->
+    <!-- p*no of paragraph we want to insert let p*4-->
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <!-- for space or line break <br> -->
+    <!-- links anchor tag -->
+    <a href="https://www.google.com/">hey google</a><br>
+    <!-- to open a link in a new tab target = "_blank" -->
+    <a href="https://www.facebook.com/" target="_blank">my fb</a><br>
+    <!-- for internal links -->
+    <a href="/class3.html" target="_blank">for class 3</a>
+    <!-- to insert image -->
+    <img src="http://127.0.0.1:5500/my%20image.html.jpg" alt="not show" width="600" height="800">
+    <!-- width and height of the image -->
+    <img src="http://127.0.0.1:5500/my%20image.html.jpg" alt="not show" width="200" height="200">
+    <!-- list ordered and an ordered list -->
+    <ol type="i">
+        <li>this is first ordered list</li>
+        <!-- for unordered -->
+        <ul type="squre">
+            <li>this is first unordered list</li>
+            <li>this is second unordered list</li>
+            <li>this is third unordered list</li>
+        </ul>
+        <li>this is second ordered list</li>
+        <li>this is third ordered list</li>
+    </ol>
+    <!-- table -->
+
+    <h3>my fist table</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>address</th>
+                <th>field</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <th>swaraj</th>
+                <th>b-87</th>
+                <th>anroid</th>
+
+
+            </tr>
+            <tr>
+                <th>mp</th>
+                <th>b-87</th>
+                <th>html</th>
+
+
+            </tr>
+            <tr>
+                <th>tarun</th>
+                <th>g-8</th>
+                <th>web</th>
+
+
+            </tr>
+        </tbody>
+    </table>
+    <!-- forms -->
+    <h3>this is my form</h3>
+    <form action="backend.php">
+        <label for="name">NAME</label>
+        <div>
+            <input type="text" name="Myname" id="name">
+        </div>
+        <br>
+        <label for="role">ROLE</label>
+        <div>
+            <input type="text" name="Myrole" id="role">
+        </div>
+        <br>
+        <label for="email">Email id</label>
+        <div>
+            <input type="email" name="MyEmail" id="email">
+        </div>
+        <br>
+        <label for="date">DATE</label>
+        <div>
+            <input type="date" name="Mydate" id="date">
+        </div>
+        <br>
+        <label for="bonus">MY Bonus</label>
+        <div>
+            <input type="number" name="MyBonus" id="bonus">
+        </div>
+        <br>
+        <div>
+            Are you eligible? : <input type="checkbox" name="My eligibility">
+        </div>
+        <br>
+
+        <div>
+            Gender : Male<input type="radio" name="My Gender"> Female<input type="radio" name="My Gender"> others <input
+                type="radio" name="My Gender">
+        </div>
+        <br>
+        <label for="yourself">Write about yourself</label>
+        <div>
+            <textarea name="Yourself" id="yourself" cols="30" rows="10"></textarea>
+        </div>
+        <br>
+
+        <div>
+            Reset Now <input type="reset" name="My Data reset">
+        </div>
+        <br>
+
+        <div>
+            Submit Hare <input type="submit" name="My Submition">  
+        </div>
+    </form>
+    <h3> id and class</h3>
+    <div id="mainBox" class="redBg blackBorder">
+        This is mainBox 
+    </div>
+    <span class="redBg"></span>
+    <!-- Emmet -->
+<!--  . is for class and # is foer id -->
+<span class="redBg"></span>
+<span id="mainspan"></span>
+ <!-- div.redBg.blackBorder.anotherClass -->
+<div class="redBg blackBorder anotherclass"></div>
+<!-- emmet takes div tag as default -->
+<!-- simply use .class name -->
+<div class="redBg"></div>
+<!-- creating multiple elements using Emmet -->
+<!-- span.myclass.myclass2.myclass3*4 + <tab>  to print 4 similar elements using Emmet-->    
+<span class="myclass myclass2 myclass3">First</span>    
+<span class="myclass myclass2 myclass3">Second</span>    
+<span class="myclass myclass2 myclass3">third</span>    
+<span class="myclass myclass2 myclass3">Fourth</span>    
+<!-- HTML ENTITIES -->
+<div class="container"></div>
+<p>this is a paragraph</p>
+<div class="container"></div>
+<p>this is another &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; paragraph with space </p>
+<p>paragraph is written like this &lt;p&gt; </p>
+<p>pound is written like this &nbsp; &pound;</p>
+<!-- For more Entities GO HTML Entities reference -->
+
+
+<!-- semantic Elements -->
+<details>Lorem ipsum dolor sit amet consectetur adipisicing elit.Veniam numquam maiores esse accusantium quasi repellat quia. Dignissimos dolor itaque vero voluptatem! Recusandae error quas numquam quidem reprehenderit! Optio odit necessitatibus enim, et temporibus velit dicta voluptate, magnam recusandae, inventore molestiae!</details><!-- For more semantic elements Go semantic elements mozila --></body></html>
