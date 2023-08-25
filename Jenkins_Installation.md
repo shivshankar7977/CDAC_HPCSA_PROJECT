@@ -1,4 +1,4 @@
-## Steps For installation of jenkins :
+## Steps For Installation of jenkins In Ubuntu Machine :
 ```bash
 sudo apt update -y
 sudo apt upgrade -y
@@ -6,7 +6,8 @@ sudo apt upgrade -y
 ### Install git and docker
 ```bash 
 sudo apt install git docker* ssh -y
-sudo systemctl start docker;systemctl enable docker;
+sudo systemctl start docker
+sudo systemctl enable docker;
 sudo systemctl status docker
 ```
 ### To check Java version 
@@ -18,7 +19,7 @@ java --version
 sudo apt install openjdk-11-jre -y
 sudo apt install openjdk-17-jre
 sudo apt install curl -y
-sudo apt update -ysudo 
+sudo apt update -y
 ```
 ### Now Download the packages
 ```bash
@@ -39,16 +40,28 @@ sudo sudo ufw status
 ### Run the below command for show admin password which is required.
 ```bash
 cat /var/lib/jenkins/secrets/initialAdminPassword
-       ff36448799454e4f9b77a870d2479ac4     
 ```
-### Click on Installed Suggested Plugins :
-* Create first admin user
-   - Enter username
-   - Enter Password
-   - Confirm Password
-   - Enter Full name 
-   - Enter Email-Address
-   - Then click on save and continue
+    - Password
+    ff36448799454e4f9b77a870d2479ac4
+   
+### Now Configuration of Jenkins On Web UI
+* Follow the Below Steps.
+     - Copy above Password 
+     - On web Browser URL Enter IP Address and port number
+     - http://192.168.30.60:8080
+     - Then we will see the jenkins web UI
+     - Paste above Copied Password 
+     - Click on Installed Suggested Plugins
+     - Create first admin user
+     - Enter username
+     - Enter Password
+     - Confirm Password
+     - Enter Full name 
+     - Enter Email-Address
+     - Then click on save and continue
+
+
+   
 * Instance Configuration
    - Then click on save and Finish
 * Jenkins is Ready
@@ -98,9 +111,8 @@ cd
 sudo systemctl restart apache2 
 sudo git clone https://github.com/shivshankar7977/shiv_Page.git /var/www/html
 ```
-
-
-
+* Then Click On Build Now
+* Then Click on Console Output
 
 
 
