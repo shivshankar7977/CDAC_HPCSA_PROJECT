@@ -16,9 +16,9 @@ java --version
 ### Install Java packages :
 ```bash
 apt install openjdk-11-jre -y
-apt install openjdk-8-jdk -y
-apt install openjdk-11-jdk -y
+apt install openjdk-17-jre
 apt install curl -y
+apt update -y
 ```
 ### Now Download the packages
 ```bash
@@ -42,6 +42,7 @@ cat /var/lib/jenkins/secrets/initialAdminPassword
        ff36448799454e4f9b77a870d2479ac4     
 ```
 ### Click on Installed Suggested Plugins :
+
 
 
 
