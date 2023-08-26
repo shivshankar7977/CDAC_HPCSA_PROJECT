@@ -1,0 +1,62 @@
+pipeline {
+    
+    agent any
+    
+    
+    stages {
+        stage('build checkout') {
+            steps {
+                git 'https://github.com/shivshankar7977/SimpleFlaskUI.git'
+            }
+        }
+        stage ('Stop previous running container'){
+            steps{
+                sh returnStatus: true, script: 'docker stop $(docker ps -a | grep ${JOB_NAME} | awk \'{print $1}\')'
+                sh returnStatus: true, script: 'docker rm ${JOB_NAME}'
+                sh returnStatus: true, script: 'docker rmi $(docker images | grep shivshankar7977/python-jenkins | awk \'{print $3}\') --force' //this will delete all images
+            }
+        }
+        
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    sh 'docker build -t shivshankar7977/python-jenkins .'
+                }
+            }
+        }
+         
+        stage('Deploy Docker Image') {
+            steps {
+                script {
+                
+                        sh "docker login -u shivshankar7977 -p dckr_pat_PyaiP1f5bM1CY4QFScZCV1VCQ0E"
+                     
+                    sh 'docker push shivshankar7977/python-jenkins'
+                }
+            }
+        }
+        
+        stage('Test - Run Docker Container on Jenkins node') {
+           steps {
+                sh label: '', script: "docker run -d --name ${JOB_NAME} -p 4005:4002 shivshankar7977/python-jenkins"
+            }
+        }
+        stage('Deploy to Test Server') {
+            steps {
+                script {
+                    def stopcontainer = "docker stop ${JOB_NAME}"
+                    def delcontName = "docker rm ${JOB_NAME}"
+                    def delimages = 'docker image prune -a --force'
+                    def drun = "docker run -d --name ${JOB_NAME} -p 4005:4002 shivshankar7977/python-jenkins"
+                    println "${drun}"
+                    sshagent(['docker-test']) {
+                        sh returnStatus: true, script: "ssh -o StrictHostKeyChecking=no tomcat@192.168.30.63 ${stopcontainer} "
+                        sh returnStatus: true, script: "ssh -o StrictHostKeyChecking=no tomcat@192.168.30.63 ${delcontName}"
+                        sh returnStatus: true, script: "ssh -o StrictHostKeyChecking=no tomcat@192.168.30.63 ${delimages}" // some block
+                        sh "ssh -o StrictHostKeyChecking=no tomcat@192.168.30.63 ${drun}"
+                    }
+                }
+            }
+        }
+    }
+}

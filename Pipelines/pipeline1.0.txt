@@ -1,0 +1,33 @@
+pipeline {
+    
+    agent any
+    
+    
+    stages {
+        stage('build checkout') {
+            steps {
+                git 'https://github.com/shivshankar7977/SimpleFlaskUI.git'
+            }
+        }
+        
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    sh 'docker build -t shivshankar7977/python-jenkins .'
+                }
+            }
+        }
+         
+        stage('Deploy Docker Image') {
+            steps {
+                script {
+                
+                        sh "docker login -u shivshankar7977 -p dckr_pat_PyaiP1f5bM1CY4QFScZCV1VCQ0E"
+                     
+                    sh 'docker push shivshankar7977/python-jenkins'
+                }
+            }
+        }
+    }
+}
+
