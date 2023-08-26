@@ -39,10 +39,15 @@ sudo sudo ufw status
 ```
 ### Run the below command for show admin password which is required.
 ```bash
-cat /var/lib/jenkins/secrets/initialAdminPassword
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
     - Password
     ff36448799454e4f9b77a870d2479ac4
+```bash
+sudo visudo
+    - Now add the below lines in your sudoers file :
+jenkins ALL=(ALL) NOPASSWD: ALL
+```
    
 ### Now Configuration of Jenkins On Web UI
 * Follow the Below Steps.
