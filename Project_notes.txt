@@ -1,0 +1,241 @@
+
+Steps to be follow:
+
+
+
+lsof -i:8000                command to view any site is running on port number 8000
+
+
+
+Project run on ubuntu machine 
+on commnd line 
+mkdir project
+cd project
+git clone https://github.com/shreys7/django-todo.git
+cd django-todo
+sudo apt install pip3 -y
+sudo apt-get update -y
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py runserver
+vi todoapp/setting.py
+     ------- change time zone to Asia/Dhaka
+python3 manage.py runserver
+python3 manage.py runserver 0.0.0.0:8001
+vi todo/setting.py
+         --- Allowd host    ['*']      allow for all server
+nohup python3 manage.py runserver 0.0.0.0:8001 &         ----- to ru in background
+lsof -i:8000
+
+
+
+
+vi Dockerfile 
+      FROM python:3
+      RUN pip install django==3.2
+      COPY . .
+      RUN python manage.py migrate
+      CMD [ "python","manage.py","runserver","0.0.0.0:8001"]
+
+sudo docker build . -t todo-app
+sudo docker ps
+sudo docker run 511c22s224f 
+sudo docker run -p 8001:8001 511c22s224f 
+
+
+
+
+Jenkins Installation with Docker 
+
+sudo systemctl stop jenkins
+
+sudo docker pull jenkins/jenkins
+sudo docker run -d -p 80:8080 docker.io/jenkins/jenkins:latest
+sudo docker ps
+sudo docker kill imageid
+sudo docker run -d -p 8080:8080 docker.io/jenkins/jenkins:latest
+
+
+
+
+WELCOME TO JENKINS !!!!!!!!
+
+set up a New node 
+give the node name     todo-app
+click on permanent agent then create
+description - to do pipeline 
+no of excuter 1
+remote root directort -- path using pwd
+lables todo-dev
+as much as possible 
+launch method by controlller
+use websocket 
+avaliability - keep this agent online as much as possible
+click on save 
+
+go to dashboard
+
+create a job 
+item name --- todo -dev
+free style project
+cd project
+cd django-todo
+ls
+vi Dockerfile
+
+
+cd /home/ubuntu/project/djangoto-do
+cd ..
+chmod 777 django-todo/
+
+
+click on build steps 
+execute shell 
+cd /home/ubuntu/project/djangoto-do
+sudo docker build . -t todo-dev
+sudo docker run -d -p 8000:8000 todo-dev
+
+
+if error ocure then run command o command line 
+docker ps
+docker kill imageid
+
+
+
+
+NOW INTEGRATE GITHUB WITH JENKINS
+
+
+git remote -v 
+git remote set-url origin our repository url
+git status
+git commit -m "added server code"
+git push -u origin master
+    -- username 
+     --- password is token
+now go to jenkins and plugin and check git server and git client
+then click on configure setting 
+add git hub server
+github 
+domain ---global
+secret text --- enter github token
+github server -- github 
+credintial name 
+then test connection
+save
+
+
+
+> create a job 
+freestyle job
+sourece code mangement 
+git
+git url
+branch master
+credintial already added
+
+
+builds stpes 
+execute shell
+
+sudo docker build . -t todo-app
+sudo docker run -p 8000:8000 -d todo-app
+
+save and apply
+
+
+on command line 
+docker ps 
+sudo docker kill image id
+
+on jenkins 
+
+build now
+
+on webbrowser url ip:8000 
+then we will see the webpage
+
+
+
+
+
+
+To check docker compose installed or not
+docker-compose -v
+
+sudo apt install docker-compose -y
+sudo docker-compose -v
+vi docker-compose.yaml
+
+
+version : "3.3"
+services:
+  web:
+        build : .
+         port :
+                 - "8000:8000"
+
+
+
+
+save
+
+
+sudo docker-compose config        --- to check yaml file olk or not
+
+sudo docker-compose up   
+push this docker-compose.yaml file to the git repository
+
+
+sudo docker-compose down
+
+in jenkins web ui 
+
+execute shell 
+sudo docker-compose down
+sudo docker-compose up -d
+
+
+build noww
+
+
+configure changes
+
+sudo docker-compose down
+sudo docker-compose up -d --force-recreate --no-deps --build web
+
+save and build now
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
