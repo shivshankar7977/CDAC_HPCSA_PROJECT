@@ -1,0 +1,229 @@
+Started by user admin
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/Python-CI-CD-Pipeline
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (build checkout)
+[Pipeline] git
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/Python-CI-CD-Pipeline/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/shivshankar7977/SimpleFlaskUI.git # timeout=10
+Fetching upstream changes from https://github.com/shivshankar7977/SimpleFlaskUI.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.34.1'
+ > git fetch --tags --force --progress -- https://github.com/shivshankar7977/SimpleFlaskUI.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision e864559ed588e7f412f0ec96a1cc8d1934808345 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f e864559ed588e7f412f0ec96a1cc8d1934808345 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D master # timeout=10
+ > git checkout -b master e864559ed588e7f412f0ec96a1cc8d1934808345 # timeout=10
+Commit message: "Update requirements.txt"
+ > git rev-list --no-walk e864559ed588e7f412f0ec96a1cc8d1934808345 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Stop previous running container)
+[Pipeline] sh
++ docker ps -a
++ grep Python-CI-CD-Pipeline
++ awk {print $1}
++ sudo docker stop 0a1a50c61632
+0a1a50c61632
+[Pipeline] sh
++ sudo docker rm Python-CI-CD-Pipeline
+Python-CI-CD-Pipeline
+[Pipeline] sh
++ + grep shivshankar7977/python-jenkins
+awk {print $3}
++ docker images
++ sudo docker rmi c60c70b0227b --force
+Untagged: shivshankar7977/python-jenkins:latest
+Untagged: shivshankar7977/python-jenkins@sha256:6f1ccf32fb9960b0cf9ce111c428e651c7dd08b4fb9715a820001e110e3bd717
+Deleted: sha256:c60c70b0227bd138c00f9c54b2fcd8c338f800e9de4a9cd6fb4de4b7ef4b59ba
+Deleted: sha256:ca2dbe37f334b09855edad7ce574bfb0fe77dc1c71d60c08fe7aed6d5f728f8e
+Deleted: sha256:8a855db23fcb72ba34d604d0315d0176f66b5d4962337a23651e201f0b31c259
+Deleted: sha256:24670e644c465687f18819151a370b0daf4d897259b5936f7e631889cc2932d0
+Deleted: sha256:ce9092e830a905a9171caab8297436a4649abcc60e340c1b1179220b6df520f0
+Deleted: sha256:352eb610338d11ef8bdfd31c9173a5feaa4926b04c898700569a476685e83c20
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Docker Image)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ docker build -t shivshankar7977/python-jenkins .
+Sending build context to Docker daemon  111.6kB
+
+Step 1/5 : FROM python:3.8-slim-buster
+ ---> addd6962740a
+Step 2/5 : ADD . /python-flask
+ ---> 78555fac22c0
+Step 3/5 : WORKDIR /python-flask
+ ---> Running in 2f575e056add
+Removing intermediate container 2f575e056add
+ ---> 245d98c62683
+Step 4/5 : RUN pip install -r requirements.txt
+ ---> Running in 7c8192fa779b
+Collecting click==8.0.3
+  Downloading click-8.0.3-py3-none-any.whl (97 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 97.5/97.5 kB 7.9 MB/s eta 0:00:00
+Collecting colorama==0.4.4
+  Downloading colorama-0.4.4-py2.py3-none-any.whl (16 kB)
+Collecting Flask==2.0.2
+  Downloading Flask-2.0.2-py3-none-any.whl (95 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 95.2/95.2 kB 10.5 MB/s eta 0:00:00
+Collecting itsdangerous==2.0.1
+  Downloading itsdangerous-2.0.1-py3-none-any.whl (18 kB)
+Collecting Jinja2==3.0.3
+  Downloading Jinja2-3.0.3-py3-none-any.whl (133 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 133.6/133.6 kB 11.2 MB/s eta 0:00:00
+Collecting MarkupSafe==2.0.1
+  Downloading MarkupSafe-2.0.1-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (30 kB)
+Collecting Werkzeug==2.0.2
+  Downloading Werkzeug-2.0.2-py3-none-any.whl (288 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 288.9/288.9 kB 11.3 MB/s eta 0:00:00
+Installing collected packages: Werkzeug, MarkupSafe, itsdangerous, colorama, click, Jinja2, Flask
+Successfully installed Flask-2.0.2 Jinja2-3.0.3 MarkupSafe-2.0.1 Werkzeug-2.0.2 click-8.0.3 colorama-0.4.4 itsdangerous-2.0.1
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[0m[91m
+[notice] A new release of pip is available: 23.0.1 -> 23.2.1
+[notice] To update, run: pip install --upgrade pip
+[0mRemoving intermediate container 7c8192fa779b
+ ---> 8a194b92412d
+Step 5/5 : CMD [ "python", "./myapp.py" ]
+ ---> Running in dfe36d4f954d
+Removing intermediate container dfe36d4f954d
+ ---> c37a8c7bcf59
+Successfully built c37a8c7bcf59
+Successfully tagged shivshankar7977/python-jenkins:latest
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy Docker Image)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ docker login -u shivshankar7977 -p dckr_pat_PyaiP1f5bM1CY4QFScZCV1VCQ0E
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+WARNING! Your password will be stored unencrypted in /var/lib/jenkins/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+[Pipeline] sh
++ docker push shivshankar7977/python-jenkins
+Using default tag: latest
+The push refers to repository [docker.io/shivshankar7977/python-jenkins]
+13d30198a2bf: Preparing
+b607dc533582: Preparing
+e6c5004ee77f: Preparing
+997b8e79e84f: Preparing
+3054512b6f71: Preparing
+ae2d55769c5e: Preparing
+e2ef8a51359d: Preparing
+ae2d55769c5e: Waiting
+e2ef8a51359d: Waiting
+3054512b6f71: Layer already exists
+997b8e79e84f: Layer already exists
+e6c5004ee77f: Layer already exists
+ae2d55769c5e: Layer already exists
+e2ef8a51359d: Layer already exists
+b607dc533582: Pushed
+13d30198a2bf: Pushed
+latest: digest: sha256:a0c6424c1e7f86c42a4dbd5cb6945fa31ec548f79f1c78d19782e738f4a8da1e size: 1790
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test - Run Docker Container on Jenkins node)
+[Pipeline] sh
++ docker run -d --name Python-CI-CD-Pipeline -p 4005:4002 shivshankar7977/python-jenkins
+c1e5cfb9de9d431a316b1b0d869c2c3b9e4f3729e876c1e860fe457f572223f3
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to Test Server)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+docker run -d --name Python-CI-CD-Pipeline -p 4010:4077 shivshankar7977/python-jenkins
+[Pipeline] sshagent
+[ssh-agent] Using credentials deployer
+[ssh-agent] Looking for ssh-agent implementation...
+[ssh-agent]   Exec ssh-agent (binary ssh-agent on a remote machine)
+$ ssh-agent
+SSH_AUTH_SOCK=/tmp/ssh-XXXXXXUILtVT/agent.90720
+SSH_AGENT_PID=90723
+Running ssh-add (command line suppressed)
+Identity added: /var/lib/jenkins/workspace/Python-CI-CD-Pipeline@tmp/private_key_5024350396028649798.key (deployer@tomcat-virtual-machine)
+[ssh-agent] Started.
+[Pipeline] {
+[Pipeline] sh
++ ssh -o StrictHostKeyChecking=no deployer@192.168.30.63 docker stop Python-CI-CD-Pipeline
+Error response from daemon: No such container: Python-CI-CD-Pipeline
+[Pipeline] sh
++ ssh -o StrictHostKeyChecking=no deployer@192.168.30.63 docker rm Python-CI-CD-Pipeline
+Error: No such container: Python-CI-CD-Pipeline
+[Pipeline] sh
++ ssh -o StrictHostKeyChecking=no deployer@192.168.30.63 docker image prune -a --force
+Total reclaimed space: 0B
+[Pipeline] sh
++ ssh -o StrictHostKeyChecking=no deployer@192.168.30.63 docker run -d --name Python-CI-CD-Pipeline -p 4010:4077 shivshankar7977/python-jenkins
+Unable to find image 'shivshankar7977/python-jenkins:latest' locally
+latest: Pulling from shivshankar7977/python-jenkins
+8b91b88d5577: Pulling fs layer
+824416e23423: Pulling fs layer
+8f777578c172: Pulling fs layer
+cbfea27109a8: Pulling fs layer
+276dfcf5deff: Pulling fs layer
+18bf52c2f533: Pulling fs layer
+faa0233eff5f: Pulling fs layer
+276dfcf5deff: Waiting
+18bf52c2f533: Waiting
+faa0233eff5f: Waiting
+cbfea27109a8: Waiting
+824416e23423: Download complete
+cbfea27109a8: Verifying Checksum
+cbfea27109a8: Download complete
+276dfcf5deff: Verifying Checksum
+276dfcf5deff: Download complete
+8b91b88d5577: Download complete
+18bf52c2f533: Download complete
+8f777578c172: Verifying Checksum
+8f777578c172: Download complete
+faa0233eff5f: Verifying Checksum
+faa0233eff5f: Download complete
+8b91b88d5577: Pull complete
+824416e23423: Pull complete
+8f777578c172: Pull complete
+cbfea27109a8: Pull complete
+276dfcf5deff: Pull complete
+18bf52c2f533: Pull complete
+faa0233eff5f: Pull complete
+Digest: sha256:a0c6424c1e7f86c42a4dbd5cb6945fa31ec548f79f1c78d19782e738f4a8da1e
+Status: Downloaded newer image for shivshankar7977/python-jenkins:latest
+3cfd853710119aa458702827681afb70ce9cd982b3ed6b6085f5a83444b46c2c
+[Pipeline] }
+$ ssh-agent -k
+unset SSH_AUTH_SOCK;
+unset SSH_AGENT_PID;
+echo Agent pid 90723 killed;
+[ssh-agent] Stopped.
+[Pipeline] // sshagent
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
