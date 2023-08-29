@@ -1,0 +1,69 @@
+How to Install tomcat in AWS ubuntu server
+
+
+Step 1: Install OpenJDK 
+
+#sudo apt update
+#sudo apt install default-jdk
+
+Step 2: Create Tomcat User
+
+#sudo useradd -r -m -U -d /opt/tomcat -s /bin/false tomcat
+
+Step 3: Install Tomcat
+
+wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.80/bin/apache-tomcat-9.0.80.tar.gz
+
+wget https://www.apache.org/dist/tomcat/tomcat-9/v9.0.80/bin/apache-tomcat-9.0.80.tar.gz.sha512
+
+sha512sum apache-tomcat-9.0.80.tar.gz
+----
+24014441b0ccdd2dda238efa56e1a039476488943e6cf04f8a372a340a49dd21ce174ed68e2f5fcc43401e85fae6d00c5eac3d357653e91601737b6fa94476de  apache-tomcat-9.0.80.tar.gz
+----
+cat apache-tomcat-9.0.80.tar.gz.sha512
+sudo mkdir /opt/tomcat
+
+sudo tar xzvf apache-tomcat-9.0.80.tar.gz -C /opt/tomcat --strip-components=1
+cd /opt/tomcat
+sudo chgrp -R tomcat /opt/tomcat
+sudo chmod -R g+r conf
+sudo chmod g+x conf
+sudo chown -R tomcat webapps/ work/ temp/ logs/
+sudo update-java-alternatives -l
+
+sudo vim  /etc/systemd/system/tomcat.service
+---
+[Unit]
+Description=Apache Tomcat Web Application Container
+After=network.target
+
+[Service]
+Type=forking
+
+Environment=JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
+Environment=CATALINA_PID=/opt/tomcat/temp/tomcat.pid
+Environment=CATALINA_HOME=/opt/tomcat
+Environment=CATALINA_BASE=/opt/tomcat
+Environment='CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC'
+Environment='JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'
+
+ExecStart=/opt/tomcat/bin/startup.sh
+ExecStop=/opt/tomcat/bin/shutdown.sh
+
+User=tomcat
+Group=tomcat
+UMask=0007
+RestartSec=10
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+--
+
+
+sudo systemctl daemon-reload
+sudo systemctl start tomcat
+sudo systemctl status tomcat
+
+https://3.108.60.211:8080
+
