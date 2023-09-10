@@ -14,7 +14,7 @@ sudo systemctl status docker
 ```bash
 java --version
 ```
-### Install Java packages :
+### **Install Java packages :**
 ```bash
 sudo apt install openjdk-11-jre -y
 sudo apt install openjdk-17-jre
@@ -118,18 +118,3 @@ sudo git clone https://github.com/shivshankar7977/shiv_Page.git /var/www/html
 ```
 * Then Click On Build Now
 * Then Click on Console Output
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
