@@ -1,3 +1,6 @@
+Title : Deployment Of CI-CD pipeline on Cloud.
+
+
 Introduction:
 I'd like to share a project I recently completed that involved creating a Python-based web application using Flask, HTML, and CSS. The primary goal of this project was to display PRN numbers, names, and institute names on a web page. To make the deployment and management of this application efficient and automated, we employed several technologies and tools. Let me walk you through the project step by step.
 
